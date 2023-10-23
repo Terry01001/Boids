@@ -19,12 +19,12 @@ class Boid(pg.sprite.Sprite):
         self.rect.y = self.loc[1]   
 
     def update(self, boids):
-        # 分别计算三个规则的调整向量
+        # 分別計算三個規則的向量
         separation_vector = self.calculate_separation(boids)
         alignment_vector = self.calculate_alignment(boids)
         cohesion_vector = self.calculate_cohesion(boids)
 
-        # 调整速度和方向
+        # 調整速度和方向
         self.heading = self.heading + separation_vector + alignment_vector + cohesion_vector
 
         # 限制速度的最大值
@@ -32,11 +32,11 @@ class Boid(pg.sprite.Sprite):
         if self.heading.length() > max_speed:
             self.heading = self.heading.normalize() * max_speed
 
-        # 根据新的方向更新位置
+        # 根據新的方向更新位置
         self.rect.x += self.heading.x
         self.rect.y += self.heading.y
 
-        # 边界处理，让鳥類在窗口内移動
+        # 邊界處理， 讓鳥類在窗口內移動
         if self.rect.left > width:
             self.rect.right = 0
         elif self.rect.right < 0:
@@ -48,7 +48,7 @@ class Boid(pg.sprite.Sprite):
 
 
     def calculate_separation(self, boids):
-        # 计算分离向量
+        # 計算分離向量
         separation_radius = 50
         separation_vector = pg.Vector2(0, 0)
         
@@ -61,14 +61,14 @@ class Boid(pg.sprite.Sprite):
         return separation_vector
 
     def calculate_alignment(self, boids):
-        # 计算对齐向量
+        # 計算對齊向量
         alignment_radius = 100
         alignment_vector = pg.Vector2(0, 0)
         count = 0
 
         for boid in boids:
             #if boid != self:
-                # 使用math.atan2()计算弧度值
+                # 使用math.atan2()計算弧度值
             angle_rad = math.atan2(boid.heading.y, boid.heading.x)
             angle_deg = math.degrees(angle_rad)
             distance = pg.Vector2(boid.rect.center) - pg.Vector2(self.rect.center)
@@ -83,7 +83,7 @@ class Boid(pg.sprite.Sprite):
 
 
     def calculate_cohesion(self, boids):
-        # 计算聚集向量
+        # 計算聚集向量
         cohesion_radius = 150
         cohesion_center = pg.Vector2(0, 0)
         count = 0
@@ -153,7 +153,7 @@ while running:
                 screen = pg.display.set_mode((width, height))
             running = False  # Exit the program
 
-    # 清空畫面
+    # 清空
     screen.fill((0,0,0))
     
 
@@ -161,12 +161,11 @@ while running:
     boids_group.update(boids_group)
 
     boids_group.draw(screen)
-    #pg.display.flip()
 
     # 更新畫面
     pg.display.flip()
 
-# 關閉Pygame
+
 pg.quit()
 
 
