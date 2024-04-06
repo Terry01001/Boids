@@ -26,4 +26,4 @@ To run the Boids simulation, follow these steps:
 3. Execute the main simulation script.
 
 ```python
-python boids_simulation.py
+python Boids.py
